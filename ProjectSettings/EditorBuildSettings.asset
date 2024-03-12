@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Create ELDEN RING in Unity/Scene_Main_Menu_01.unity
+    guid: 203c4243bcc29dd4abc0b33dc54f3020
+  - enabled: 1
+    path: Assets/Scenes/Create ELDEN RING in Unity/Scene_World_01.unity
+    guid: e46dee98341f8c0488cf98cb136e9ece
   m_configObjects: {}
