@@ -30,6 +30,11 @@ namespace SG
 
             yield return null;
         }
+
+        public int GetworldSceneIndex()
+        {
+            return worldSceneIndex;
+        }
     }
 }
 
