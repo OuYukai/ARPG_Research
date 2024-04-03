@@ -28,11 +28,11 @@ Transform:
   m_GameObject: {fileID: 2963099041512611601}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3472003652990756700}
+  m_Father: {fileID: 2853031476854587398}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2469213720809143237
 Camera:
@@ -137,6 +137,38 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!1 &5155344351511513005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2853031476854587398}
+  m_Layer: 0
+  m_Name: Camera Pivot (Up & Down)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2853031476854587398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5155344351511513005}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4830346898514455635}
+  m_Father: {fileID: 3472003652990756700}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6059248674431169942
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +180,7 @@ GameObject:
   - component: {fileID: 3472003652990756700}
   - component: {fileID: -7055541503783165061}
   m_Layer: 0
-  m_Name: Player Camera
+  m_Name: Player Camera (Left & Right)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +199,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4830346898514455635}
+  - {fileID: 2853031476854587398}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-7055541503783165061
@@ -182,4 +214,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ed2c54384b521489cd65cf7687f94b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   cameraObject: {fileID: 2469213720809143237}
+  cameraPivotTransform: {fileID: 2853031476854587398}
+  cameraSmoothSpeed: 1
+  leftAndRightRotationSpeed: 220
+  upAndDownRotationSpeed: 220
+  minimumPivot: -30
+  maximumpivot: 60
+  cameraCollisionRadius: 0.2
+  collideWithLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  leftAndRightLookAngle: 0
+  upAndDownLookAngle: 0
