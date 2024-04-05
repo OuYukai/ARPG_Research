@@ -10,6 +10,7 @@ namespace SG
     public class PlayerInputManager : MonoBehaviour
     {
         public static PlayerInputManager instance;
+        public PlayerManager player;
         // THINK ABOUT GOALS IN STEPS
         // 2. MOVE CHARACTER BASED ON THOSE VALUES
 
@@ -122,6 +123,17 @@ namespace SG
             {
                 moveAmount = 1;
             }
+            
+            //  WHY DO WE PASS 0 ON THE HORIZONTAL? BECAUSE WE ONLY WANT NON-STRAFING MOVEMENT
+            //  WE USE THE HORIZONTAL WHEN WE ARE STRFING OR LOCKED ON
+
+            if (player == null)
+                return;
+
+            //  IF WE ARE NOT LOCKED ON, ONLY USE THE MOVE AMOUNT
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+
+            //  IF WE ARE LOCKED ON PASS THE HORIZONTAL MOVEMENT AS WELL
         }
     
         private void HandleCameraMovementInput()
