@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
+using Unity.Netcode;
 
 namespace SG
 {
@@ -86,6 +88,27 @@ namespace SG
             */
 
             #endregion
+        }
+
+        public virtual void PlayerTargetActionAnimation(
+            string targetAnimation, 
+            bool isPerformingAction, 
+            bool applyRootMotion = true, 
+            bool canMove = false, 
+            bool canRotate = false)
+        {
+            character.applyRootMotion = applyRootMotion;
+            character.animator.CrossFade(targetAnimation, 0.2f);
+            //  CAN BE USED TO STOP CHARACTER FROM ATTEMPTING NEW ACTIONS
+            //  FOR EXAMPLE, IF YOU GET DAMAGED, AND BEING PERFORMING A DAMAGE ANIMATION
+            //  THIS FLAG WILL TURN TRUE IF YOU ARE STUNNED
+            //  WE CAN THEN CHECK FOR THIS BEFORE ATTEMPTING NEW ACTIONS
+            character.isPerformingAction = isPerformingAction;
+            character.canMove = canMove;
+            character.canRotate = canRotate;
+
+            //  TELL THE SERVER/HOST WE PLAYED AN ANIMATION, AND TO PLAY THAT ANIMATION FOR EVERYBODY ELSE PRESENT
+            character.characterNetworkManager.NotfyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
     }
 }

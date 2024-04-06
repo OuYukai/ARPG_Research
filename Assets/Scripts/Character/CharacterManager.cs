@@ -10,7 +10,14 @@ namespace SG
     {
         [HideInInspector] public CharacterController characterController;
         [HideInInspector] public Animator animator;
+
         [HideInInspector] public CharacterNetworkManager characterNetworkManager;
+
+        [Header("Flags")]
+        public bool isPerformingAction = false;
+        public bool applyRootMotion = false;
+        public bool canMove = true;
+        public bool canRotate = true;
 
         protected virtual void Awake()
         {

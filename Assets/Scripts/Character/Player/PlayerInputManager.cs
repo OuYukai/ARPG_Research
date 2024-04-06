@@ -27,6 +27,9 @@ namespace SG
         public float cameraVerticalInput;
         public float cameraHorizontalInput;
 
+        [Header("PLATER ACTION INPUT")]
+        [SerializeField] bool dodgeInput = false;
+
         private void Awake()
         {
             if (instance == null)
@@ -73,6 +76,7 @@ namespace SG
 
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
+                playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
             }
 
             playerControls.Enable();
@@ -102,10 +106,17 @@ namespace SG
 
         private void Update()
         {
-            HandlePlayerMovementInput();
-            HandleCameraMovementInput();
+            HandleAllInputs();
         }
 
+        private void HandleAllInputs()
+        {
+            HandlePlayerMovementInput();
+            HandleCameraMovementInput();
+            HandleDodgeInput();
+        }
+
+        //  MOVEMENT
         private void HandlePlayerMovementInput()
         {
             verticalInput = movementInput.y;
@@ -140,6 +151,20 @@ namespace SG
         {
             cameraVerticalInput = cameraInput.y;
             cameraHorizontalInput = cameraInput.x;
+        }
+
+        //  ACTION
+        private void HandleDodgeInput()
+        {
+            if (dodgeInput)
+            {
+                dodgeInput = false;
+
+                //  FUTURE NOTE: RETURN (DO NOTHING) IF MENU OR UI WINDOW IS OPEN
+
+                //  PERFORM A DODGE
+                player.playerLocomotionManager.AttemptToPerformDodge();
+            }
         }
     }
 }
