@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace SG
@@ -16,6 +17,7 @@ namespace SG
         private Vector3 targetRotationDirection;
         [SerializeField] float walkingSpeed = 2;
         [SerializeField] float runningSpeed = 5;
+        [SerializeField] float sprintingSpeed = 10;
         [SerializeField] float rotationSpeed = 15;
 
         [Header("Dodge")]
@@ -45,7 +47,7 @@ namespace SG
                 moveAmount = player.characterNetworkManager.moveAmount.Value;
 
                 // IF NOT LOCKED ON, PASS MOVE AMOUNT
-                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
 
                 // IF LOCKED ON, PASS HORZ AND VERT
             }
@@ -80,16 +82,23 @@ namespace SG
             moveDirection.Normalize();
             moveDirection.y = 0;
 
-            if (PlayerInputManager.instance.moveAmount > 0.5f)
+            if (player.playerNetworkManager.isSprinting.Value)
             {
-                // MOVE AT A RUNNING SPEED
-                player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
+                player.characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
             }
-            else if (PlayerInputManager.instance.moveAmount <= 0.5f)
+            else
             {
-                // MOVE AT A WALKING SPEED
-                player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
-            }
+                if (PlayerInputManager.instance.moveAmount > 0.5f)
+                {
+                    // MOVE AT A RUNNING SPEED
+                    player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
+                }
+                else if (PlayerInputManager.instance.moveAmount <= 0.5f)
+                {
+                    // MOVE AT A WALKING SPEED
+                    player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
+                }
+            }  
         }
 
         private void HandleRotation()
@@ -138,6 +147,30 @@ namespace SG
                 //  PERFORM A BACKSTEP ANIMATION
                 //player.playerAnimatorManager.PlayerTargetActionAnimation("Back_Step_01", true, true);
             }
+        }
+
+        public void HandleSprinting()
+        {
+            if (player.isPerformingAction)
+            {
+                //  SET SPRINTING TO FALSE
+                player.playerNetworkManager.isSprinting.Value = false;
+            }
+
+            //  IF WE ARE OUT OF STAMINA, SET SPRINTING TO FALSE
+
+            //  IF WE ARE MOVING, SET SPRINTING TO TRUE
+            if (moveAmount >= 0.5)
+            {
+                player.playerNetworkManager.isSprinting.Value = true;
+            }
+            //  IF WE ARE STATIONARY/MOVEING SLOWLY, SET SPRINTING TO FALSE
+            else
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+            }
+
+            
         }
     }
 }
