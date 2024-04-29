@@ -19,9 +19,11 @@ namespace SG
         [SerializeField] float runningSpeed = 5;
         [SerializeField] float sprintingSpeed = 10;
         [SerializeField] float rotationSpeed = 15;
+        [SerializeField] int sprintingStaminaCost = 2;
 
         [Header("Dodge")]
         private Vector3 rollDirection;
+        [SerializeField] float dodgeStaminaCost = 25;
 
         protected override void Awake()
         {
@@ -127,6 +129,9 @@ namespace SG
             if (player.isPerformingAction)
                 return;
 
+            if (player.playerNetworkManager.currentStamina.Value <= 0)
+                return;
+
             //  IF WE ARE MOVING WHEN ATTEMPT TO DODGE, WE PERFORM A ROLL
             if (PlayerInputManager.instance.moveAmount > 0)
             {
@@ -147,6 +152,8 @@ namespace SG
                 //  PERFORM A BACKSTEP ANIMATION
                 //player.playerAnimatorManager.PlayerTargetActionAnimation("Back_Step_01", true, true);
             }
+
+            player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
         }
 
         public void HandleSprinting()
@@ -158,6 +165,11 @@ namespace SG
             }
 
             //  IF WE ARE OUT OF STAMINA, SET SPRINTING TO FALSE
+            if (player.playerNetworkManager.currentStamina.Value <= 0)
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+                return;
+            }
 
             //  IF WE ARE MOVING, SET SPRINTING TO TRUE
             if (moveAmount >= 0.5)
@@ -170,7 +182,10 @@ namespace SG
                 player.playerNetworkManager.isSprinting.Value = false;
             }
 
-            
+            if (player.playerNetworkManager.isSprinting.Value)
+            {
+                player.playerNetworkManager.currentStamina.Value -= sprintingStaminaCost * Time.deltaTime;
+            }
         }
     }
 }

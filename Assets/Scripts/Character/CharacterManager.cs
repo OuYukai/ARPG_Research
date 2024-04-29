@@ -19,6 +19,7 @@ namespace SG
         public bool canMove = true;
         public bool canRotate = true;
 
+
         protected virtual void Awake()
         {
             DontDestroyOnLoad(this);
@@ -59,6 +60,7 @@ namespace SG
         {
             
         }
+
     }
 }
 

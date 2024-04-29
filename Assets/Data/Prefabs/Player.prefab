@@ -78,11 +78,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 41cc18317a6173a4680a162bddf2d6bd,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 3465978118455037932}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 41cc18317a6173a4680a162bddf2d6bd,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: -2144852838691528498}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 41cc18317a6173a4680a162bddf2d6bd,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3465978118455037932}
+      addedObject: {fileID: 5178624589769210393}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 41cc18317a6173a4680a162bddf2d6bd,
         type: 3}
       insertIndex: -1
@@ -151,27 +155,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &-2144852838691528498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7187984912433060351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aaed3a97fb11ec4b9bf4ca5200ccff2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterController: {fileID: 0}
-  animator: {fileID: 0}
-  characterNetworkManager: {fileID: 0}
-  isPerformingAction: 0
-  applyRootMotion: 0
-  canMove: 1
-  canRotate: 1
-  playerAnimatorManager: {fileID: 0}
-  playerLocomotionManager: {fileID: 0}
 --- !u!114 &3465978118455037932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +180,42 @@ MonoBehaviour:
     m_InternalValue: 0
   moveAmount:
     m_InternalValue: 0
+  isSprinting:
+    m_InternalValue: 0
+--- !u!114 &-2144852838691528498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187984912433060351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aaed3a97fb11ec4b9bf4ca5200ccff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
+  animator: {fileID: 0}
+  characterNetworkManager: {fileID: 0}
+  isPerformingAction: 0
+  applyRootMotion: 0
+  canMove: 1
+  canRotate: 1
+  playerAnimatorManager: {fileID: 0}
+  playerLocomotionManager: {fileID: 0}
+  playerNetworkManager: {fileID: 0}
+--- !u!114 &5178624589769210393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187984912433060351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c35d3a3f51748428b1be86e0e0837b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8201454687292542145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +233,7 @@ MonoBehaviour:
   moveAmount: 0
   walkingSpeed: 2
   runningSpeed: 5
+  sprintingSpeed: 10
   rotationSpeed: 15
 --- !u!114 &-2725226737647650352
 MonoBehaviour:

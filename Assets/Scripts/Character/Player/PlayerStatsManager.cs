@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SG
 {
-    public class PlayerSoundFXManager : CharacterSoundFXManager
+    public class PlayerStatsManager : CharacterStatsManager
     {
 
     }
