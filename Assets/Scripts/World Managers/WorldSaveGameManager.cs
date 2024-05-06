@@ -116,6 +116,32 @@ namespace SG
                 return;
             }
             
+            //  CHECK TO SEE IF WE CAN CREATE A NEW SAVE FILE (CHECK FOR OTHER EXISTING FILES FIRST)
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_03);
+            
+            if (!saveFileDataWriter.CheckToSeeIfFileExists())
+            {
+                //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
+                currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_03;
+                currentCharacterData = new CharacterSaveData();
+                StartCoroutine(LoadWorldScene());
+                
+                return;
+            }
+            
+            //  CHECK TO SEE IF WE CAN CREATE A NEW SAVE FILE (CHECK FOR OTHER EXISTING FILES FIRST)
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_04);
+            
+            if (!saveFileDataWriter.CheckToSeeIfFileExists())
+            {
+                //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
+                currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_04;
+                currentCharacterData = new CharacterSaveData();
+                StartCoroutine(LoadWorldScene());
+                
+                return;
+            }
+            
             //  IF THERE ARE NO FREE SLOTS, NOTIFY THE PLAYER
             TitleScreanManager.instance.DisplayNoFreeCharacterSlotPopUp();
         }
@@ -151,6 +177,16 @@ namespace SG
             //  WRITE THAT INFO ONTO A JSON FILE, SAVED TO THIS MACHINE
             saveFileDataWriter.CreateNewCharacterSaveFile(currentCharacterData);
         }
+
+        public void DeleteGame(CharacterSlot characterSlot)
+        {
+            //  CHOOSE FILE BASED ON NAME
+            saveFileDataWriter = new SaveFileDataWriter();
+            saveFileDataWriter.saveDataDirectoryPath = Application.persistentDataPath;
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(characterSlot);
+            
+            saveFileDataWriter.DeleteSaveFile();
+        }
         
         //  LOAD ALL CHARACTER PROFILES ON DEVIDCE WHEN STARTING GAME
         private void LoadAllCharacterProfiles()
@@ -177,7 +213,11 @@ namespace SG
     
         public IEnumerator LoadWorldScene()
         {
+            //  IF YOU JUST WANT 1 WORLD SCENE USE THIS
             AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
+            
+            //  IF YOU WANT TO USE DIFFERENT SCENES FOR LEVELS IN YOUR PROJECT USE THIS
+            //AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
 
             player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
 

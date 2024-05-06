@@ -103,6 +103,11 @@ namespace SG
             WorldSaveGameManager.instance.currentCharacterSlotBeingUsed = characterSlot;
             WorldSaveGameManager.instance.LoadGame();
         }
+
+        public void SelectCurrentSlot()
+        {
+            TitleScreanManager.instance.SelectCharacterSlot(characterSlot);
+        }
     }
 }
 
