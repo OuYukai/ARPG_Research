@@ -11,7 +11,7 @@ namespace SG
     {
         public static WorldSaveGameManager instance;
 
-        [SerializeField] PlayerManager player;
+        public PlayerManager player;
 
         [Header("SAVE / LOAD")] 
         [SerializeField] private bool saveGame;
@@ -30,9 +30,9 @@ namespace SG
         
         [Header("Character Slots")] 
         public CharacterSaveData characterSlot01;
-        //public CharacterSaveData characterSlot02;
-        //public CharacterSaveData characterSlot03;
-        //public CharacterSaveData characterSlot04;
+        public CharacterSaveData characterSlot02;
+        public CharacterSaveData characterSlot03;
+        public CharacterSaveData characterSlot04;
 
         private void Awake()
         {
@@ -45,6 +45,7 @@ namespace SG
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
+            LoadAllCharacterProfiles();
         }
 
         private void Update()
@@ -62,37 +63,67 @@ namespace SG
             }
         }
 
-        private void DecideCharacterFileNameBasedOnCharacterSlotBeingUsed()
+        public string DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot characterSlot)
         {
-            switch (currentCharacterSlotBeingUsed)
+            string fileName = "";
+            switch (characterSlot)
             {
                 case CharacterSlot.CharacterSlot_01:
-                    saveFileName = "CharacterSlot_01";
+                    fileName = "CharacterSlot_01";
                     break;
                 case CharacterSlot.CharacterSlot_02:
-                    saveFileName = "CharacterSlot_02";
+                    fileName = "CharacterSlot_02";
                     break;
                 case CharacterSlot.CharacterSlot_03:
-                    saveFileName = "CharacterSlot_03";
+                    fileName = "CharacterSlot_03";
                     break;
                 case CharacterSlot.CharacterSlot_04:
-                    saveFileName = "CharacterSlot_04";
+                    fileName = "CharacterSlot_04";
                     break;
             }
+
+            return fileName;
         }
 
-        public void CreateNewGame()
+        public void AttemptToCreateNewGame()
         {
-            //  CREATE A NEW FILE, WITH A FILE NAME DEPENDING ON WHICH SLOT WE ARE USING
-            DecideCharacterFileNameBasedOnCharacterSlotBeingUsed();
+            saveFileDataWriter = new SaveFileDataWriter();
+            saveFileDataWriter.saveDataDirectoryPath = Application.persistentDataPath;
+            
+            //  CHECK TO SEE IF WE CAN CREATE A NEW SAVE FILE (CHECK FOR OTHER EXISTING FILES FIRST)
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_01);
 
-            currentCharacterData = new CharacterSaveData();
+            if (!saveFileDataWriter.CheckToSeeIfFileExists())
+            {
+                //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
+                currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_01;
+                currentCharacterData = new CharacterSaveData();
+                StartCoroutine(LoadWorldScene());
+                
+                return;
+            }
+            
+            //  CHECK TO SEE IF WE CAN CREATE A NEW SAVE FILE (CHECK FOR OTHER EXISTING FILES FIRST)
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_02);
+            
+            if (!saveFileDataWriter.CheckToSeeIfFileExists())
+            {
+                //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
+                currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_02;
+                currentCharacterData = new CharacterSaveData();
+                StartCoroutine(LoadWorldScene());
+                
+                return;
+            }
+            
+            //  IF THERE ARE NO FREE SLOTS, NOTIFY THE PLAYER
+            TitleScreanManager.instance.DisplayNoFreeCharacterSlotPopUp();
         }
 
         public void LoadGame()
         {
             //  LOAD A PREVIOUS FILE, WITH A FILE NAME DEPENDING ON WHICH SLOT WE ARE USING
-            DecideCharacterFileNameBasedOnCharacterSlotBeingUsed();
+            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(currentCharacterSlotBeingUsed);
 
             saveFileDataWriter = new SaveFileDataWriter();
             
@@ -107,7 +138,7 @@ namespace SG
         public void SaveGame()
         {
             //  SAVE THE CURRENT FILE UNDER A FILE NAME DEPENDING ON WHICH SLOT WE ARE USING
-            DecideCharacterFileNameBasedOnCharacterSlotBeingUsed();
+            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(currentCharacterSlotBeingUsed);
 
             saveFileDataWriter = new SaveFileDataWriter();
             //  GENERALLY WORKS ON MULTIPLE MACHINE TYPES (Application.persistentDataPath)
@@ -120,10 +151,35 @@ namespace SG
             //  WRITE THAT INFO ONTO A JSON FILE, SAVED TO THIS MACHINE
             saveFileDataWriter.CreateNewCharacterSaveFile(currentCharacterData);
         }
+        
+        //  LOAD ALL CHARACTER PROFILES ON DEVIDCE WHEN STARTING GAME
+        private void LoadAllCharacterProfiles()
+        {
+            saveFileDataWriter = new SaveFileDataWriter();
+            saveFileDataWriter.saveDataDirectoryPath = Application.persistentDataPath;
+
+            saveFileDataWriter.saveFileName =
+                DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_01);
+            characterSlot01 = saveFileDataWriter.LoadSaveFile();
+            
+            saveFileDataWriter.saveFileName =
+                DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_02);
+            characterSlot02 = saveFileDataWriter.LoadSaveFile();
+            
+            saveFileDataWriter.saveFileName =
+                DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_03);
+            characterSlot03 = saveFileDataWriter.LoadSaveFile();
+            
+            saveFileDataWriter.saveFileName =
+                DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_04);
+            characterSlot04 = saveFileDataWriter.LoadSaveFile();
+        }
     
         public IEnumerator LoadWorldScene()
         {
             AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
+
+            player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
 
             yield return null;
         }
