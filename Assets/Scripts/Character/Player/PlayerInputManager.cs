@@ -30,6 +30,7 @@ namespace SG
         [Header("PLATER ACTION INPUT")]
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
+        [SerializeField] bool jumpInput = false;
 
         private void Awake()
         {
@@ -78,6 +79,7 @@ namespace SG
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+                playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
 
                 //  HOLDING THE INPUT, SETS THE BOOL TO TRUE
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -121,6 +123,7 @@ namespace SG
             HandleCameraMovementInput();
             HandleDodgeInput();
             HandleSprinting();
+            HandleJumpInput();
         }
 
         //  MOVEMENT
@@ -184,6 +187,19 @@ namespace SG
             else
             {
                 player.playerNetworkManager.isSprinting.Value = false;
+            }
+        }
+
+        private void HandleJumpInput()
+        {
+            if (jumpInput)
+            {
+                jumpInput = false;
+                
+                // IF WE HAVE A UI WINDOW OPEN, SIMPLY RETURN WITHOUT DOING ANYTHING
+                
+                // ATTEMPT TO PERFORM JUMP
+                player.playerLocomotionManager.AttemptToPerformJump();
             }
         }
     }
