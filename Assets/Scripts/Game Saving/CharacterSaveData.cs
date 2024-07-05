@@ -23,6 +23,14 @@ namespace SG
         public float xPosition;
         public float yPosition;
         public float zPosition;
+
+        [Header("Resouces")] 
+        public float currentHealth;
+        public float currentStamina;
+        
+        [Header("Stats")] 
+        public int vitality;
+        public int endurance;
     } 
 }
 
