@@ -8,10 +8,14 @@ namespace SG
 {
     public class CharacterManager : NetworkBehaviour
     {
+        [Header("Status")] public NetworkVariable<bool> isDead = new NetworkVariable<bool>(false,
+            NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        
         [HideInInspector] public CharacterController characterController;
         [HideInInspector] public Animator animator;
 
         [HideInInspector] public CharacterNetworkManager characterNetworkManager;
+        [HideInInspector] public CharacterEffectManager characterEffectManager;
 
         [Header("Flags")]
         public bool isPerformingAction = false;
@@ -30,6 +34,7 @@ namespace SG
             animator = GetComponent<Animator>();
 
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
+            characterEffectManager = GetComponent<CharacterEffectManager>();
         }
 
         protected virtual void Update()
