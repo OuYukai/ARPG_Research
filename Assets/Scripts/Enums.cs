@@ -15,3 +15,12 @@ public enum CharacterSlot
     CharacterSlot_04,
     No_SLOT,
 }
+
+public enum WeaponModelSlot
+{
+    RightHand,
+    LeftHand,
+    //Right Hips,
+    //Left Hips,
+    //Back
+}
