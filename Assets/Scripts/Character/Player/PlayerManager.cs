@@ -9,6 +9,9 @@ namespace SG
 {
     public class PlayerManager : CharacterManager
     {
+        [Header("DEBUG MENU")] 
+        [SerializeField] private bool respwnCharacter = false;
+        
         [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
         [HideInInspector] public PlayerNetworkManager playerNetworkManager;
@@ -40,6 +43,8 @@ namespace SG
 
             //  REGENERATE STAMINA
             playerStatsManager.RegenerateStamina();
+            
+            DebugMenu();
         }
 
         protected override void LateUpdate()
@@ -73,6 +78,35 @@ namespace SG
                 playerNetworkManager.currentHealth.OnValueChanged += PlayerUIManager.instance.playerUIHudManager.SetNewHealthValue;
                 playerNetworkManager.currentStamina.OnValueChanged += PlayerUIManager.instance.playerUIHudManager.SetNewStaminaValue;
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenerationTimer;
+            }
+
+            playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
+        }
+
+        public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
+        {
+            if (IsOwner)
+            {
+                PlayerUIManager.instance.playerUIPopUpManager.SendYouDiedPopUp();
+            }
+            
+            return base.ProcessDeathEvent(manuallySelectDeathAnimation);
+            
+            //  CHECK FOR PLAYERS THAT ARE ALIVE, IF 0 RESPAWN CHARACTERS
+        }
+
+        public override void ReviveCharacter()
+        {
+            base.ReviveCharacter();
+
+            if (IsOwner)
+            {
+                playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
+                playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
+                //  RESTORE FOCUS POINTS
+                
+                //  PLAY REBIRTH EFFECTS
+                playerAnimatorManager.PlayerTargetActionAnimation("Empty", false);
             }
         }
 
@@ -108,6 +142,16 @@ namespace SG
             playerNetworkManager.currentHealth.Value = currentCharacterData.currentHealth;
             playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
             PlayerUIManager.instance.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
+        }
+        
+        //  DEBUG DELETE LATER
+        private void DebugMenu()
+        {
+            if (respwnCharacter)
+            {
+                respwnCharacter = false;
+                ReviveCharacter();
+            }
         }
     }
 }
