@@ -660,6 +660,10 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
+  currentRightHandWeaponID:
+    m_InternalValue: 0
+  currentLeftHandWeaponID:
+    m_InternalValue: 0
 --- !u!114 &-2144852838691528498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,11 +690,13 @@ MonoBehaviour:
   canMove: 1
   canRotate: 1
   respwnCharacter: 0
+  switchRightWeapon: 0
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
   playerNetworkManager: {fileID: 0}
   playerStatsManager: {fileID: 0}
   playerInventoryManager: {fileID: 0}
+  playerEquipmentManager: {fileID: 0}
 --- !u!114 &5178624589769210393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,10 +756,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f50c57c77a30614b9f5b1393577a671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRightHandWeapon: {fileID: 11400000, guid: c9190bc3cfd1ed341956be1bcff1c764,
+  currentRightHandWeapon: {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff,
     type: 2}
-  currentLeftHandWeapon: {fileID: 11400000, guid: c9190bc3cfd1ed341956be1bcff1c764,
+  currentLeftHandWeapon: {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff,
     type: 2}
+  weaponsInRightHandSlots:
+  - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
+  - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
+  - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
+  rightHandWeaponIndex: 0
+  weaponsInLeftHandSlots:
+  - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
+  - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
+  - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
+  leftHandWeaponIndex: 0
 --- !u!114 &-6542499188051978762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -768,6 +784,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightHandSlot: {fileID: 0}
   leftHandSlot: {fileID: 0}
+  rightWeaponManager: {fileID: 0}
+  leftWeaponManager: {fileID: 0}
   rightHandWeaponModel: {fileID: 0}
   leftHandWeaponModel: {fileID: 0}
 --- !u!114 &-2725226737647650352
