@@ -14,10 +14,13 @@ namespace SG
             {
                 character = animator.GetComponent<CharacterManager>();
             }
-
-            //  THIS IS CALLED AN ACTION ENDS, AND THE STATE RETURNS TO "Main_Jump_End_01"
             
-            character.isJumping = false;
+            //  THIS IS CALLED AN ACTION ENDS, AND THE STATE RETURNS TO "Main_Jump_End_01"
+
+            if (character.IsOwner)
+            {
+                character.characterNetworkManager.isJumping.Value = false;
+            }
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

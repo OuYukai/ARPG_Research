@@ -52,6 +52,11 @@ namespace SG
             SceneManager.activeSceneChanged += OnSceneChange;
 
             instance.enabled = false;
+
+            if (playerControls != null)
+            {
+                playerControls.Disable();
+            }
         }
 
         private void OnSceneChange(Scene oldScene, Scene newScene)
@@ -60,12 +65,22 @@ namespace SG
             if (newScene.buildIndex == WorldSaveGameManager.instance.GetworldSceneIndex())
             {
                 instance.enabled = true;
+                
+                if (playerControls != null)
+                {
+                    playerControls.Enable();
+                }
             }
             // OTHERWISE WE MUST BE AT THE MAIN MENU, DISABLE OUR PLAYERS CONTROLS
             // THIS IS SO OUR PLAYER CANT MOVE AROUND IF WE ENTER LIKE A CHARACTER CREATION MENU ECT
             else
             {
                 instance.enabled = false;
+                
+                if (playerControls != null)
+                {
+                    playerControls.Disable();
+                }
             }
         }
 
