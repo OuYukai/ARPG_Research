@@ -25,7 +25,13 @@ namespace SG
         
         private void OnTriggerEnter(Collider other)
         {
-            CharacterManager damageTarget = other.GetComponent<CharacterManager>();
+            CharacterManager damageTarget = other.GetComponentInParent<CharacterManager>();
+            
+            //  IF YOU WANT TO SEARCH ON BOTH THE DAMAGEABLE CHARACTER COLLIDERS & THE CHARACTER CONTROLLER COLLIDER JUST CHECK FOR NULL HERE AND DO THE FOLLOWING
+            //if (damageTarget == null)
+            //{
+            //    damageTarget = other.GetComponent<CharacterManager>();
+            //}
 
             if (damageTarget != null)
             {

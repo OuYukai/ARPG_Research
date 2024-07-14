@@ -65,7 +65,7 @@ namespace SG
         //  DRAW OUR GROUND CHECK SPHERE IN SCENE VIEW
         protected void OnDrawGizmosSelected()
         {
-            Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
+            //Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
         }
     }
 }
