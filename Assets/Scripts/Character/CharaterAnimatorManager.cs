@@ -123,6 +123,29 @@ namespace SG
             //  TELL THE SERVER/HOST WE PLAYED AN ANIMATION, AND TO PLAY THAT ANIMATION FOR EVERYBODY ELSE PRESENT
             character.characterNetworkManager.NotfyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
+        
+        public virtual void PlayerTargetAttackActionAnimation(
+            string targetAnimation, 
+            bool isPerformingAction, 
+            bool applyRootMotion = true, 
+            bool canMove = false, 
+            bool canRotate = false)
+        {
+            //  KEEP TRACK OF LAST ATTACK PERFORMED (FOR COMBOS)
+            //  KEEP TRACK OF CURRENT ATTACK TYPE (LIGHT, HEAVY, ECT)
+            //  UPDATE ANIMATION SET TO CURRENT WEAPONS ANIMATIONS
+            //  DECIDE IF OUR ATTACK CAN BE PARRIED
+            //  TELL THE NETWORK OUR "ISATTACKING" FLAG IS ACTIVE (For counter damage ect)
+            
+            character.applyRootMotion = applyRootMotion;
+            character.animator.CrossFade(targetAnimation, 0.2f);
+            character.isPerformingAction = isPerformingAction;
+            character.canMove = canMove;
+            character.canRotate = canRotate;
+
+            //  TELL THE SERVER/HOST WE PLAYED AN ANIMATION, AND TO PLAY THAT ANIMATION FOR EVERYBODY ELSE PRESENT
+            character.characterNetworkManager.NotfyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
+        }
     }
 }
 
