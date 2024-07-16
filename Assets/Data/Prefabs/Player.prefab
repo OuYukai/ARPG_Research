@@ -1109,6 +1109,7 @@ MonoBehaviour:
   characterNetworkManager: {fileID: 0}
   characterEffectManager: {fileID: 0}
   charaterAnimatorManager: {fileID: 0}
+  characterCombatManager: {fileID: 0}
   isPerformingAction: 0
   isGrounded: 1
   applyRootMotion: 0
@@ -1135,6 +1136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7d0744c1d36b8499f00f58cc5e6eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentAttackType: 0
   currentWeaponBeingUsed: {fileID: 0}
 --- !u!114 &5178624589769210393
 MonoBehaviour:
@@ -1263,6 +1265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de3c35823351034588fc56a6166d9b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodSplatterVFX: {fileID: 0}
   effectToTest: {fileID: 11400000, guid: b86ee71040998734eaa97d54063f344d, type: 2}
   processEffect: 0
 --- !u!143 &6106678455883287996

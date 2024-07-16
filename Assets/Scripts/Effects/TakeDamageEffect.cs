@@ -57,8 +57,12 @@ namespace SG
             //  CHECK WHICH DIRECTIONAL DAMAGE COME FROM
             //  PLAY A DAMAGE ANIMATION
             //  CHECK FOR BUILD UPS (POISE BLEED ECT)
+            
             //  PLAY DAMAGE SOUND FX
+            PlayDamageSFX(character);
+            
             //  PLAY DAMAGE VFX (BLOOD)
+            PlayDamageVFX(character);
             
             //  IF CHARACTER IS A.I, CHECK FOR NEW TARGET IF CHARACTER CAUSING DAMAGE IS PRESENT
         }
@@ -90,6 +94,23 @@ namespace SG
             character.characterNetworkManager.currentHealth.Value -= finalDamageDealt;
             
             //  CALCULATE POISE DAMAGE TO DETERMINE IF THE CHARACTER WILL BE STUNNED
+        }
+
+        private void PlayDamageVFX(CharacterManager character)
+        {
+            //  IF WE HAVE FIRE DAMAGE, PLAY FIRE PARTICLES
+            //  LIGHTING DAMAGE, LIGHTING PARTICLES ECT
+            
+            character.characterEffectManager.PlayBloodSplatterVFX(contactPoint);
+        }
+
+        private void PlayDamageSFX(CharacterManager character)
+        {
+            AudioClip physicalDamageSFX = WorldSoundFXManager.instance.ChooseRandomSFXFromArray(WorldSoundFXManager.instance.physicalDamageSFX);
+            
+            character.characterSoundFXManager.PlaySoundFX(physicalDamageSFX);
+            //  IF FIRE DAMAGE IS GREATER THAN 0, PLAY BURN SFX
+            //  IF LIGHTING DAMAGE IS GREATER THAN 0, PLAY ZAP SFX
         }
     }
 }

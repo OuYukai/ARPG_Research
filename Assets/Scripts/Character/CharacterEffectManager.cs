@@ -15,6 +15,9 @@ namespace SG
 
         private CharacterManager character;
 
+        [Header("VFX")] 
+        [SerializeField] private GameObject bloodSplatterVFX;
+
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
@@ -25,6 +28,20 @@ namespace SG
             //  TAKE IN AN EFFECT
             //  PROCESS IT
             effect.ProcessEffect(character);
+        }
+
+        public void PlayBloodSplatterVFX(Vector3 contactPoint)
+        {
+            //  IF WE MANUALLY HAVE PLACED A BLOOD SPLATTER VFX ON THIS MODEL, PLAY ITS VERSION
+            if (bloodSplatterVFX != null)
+            {
+                GameObject bloodSplatter = Instantiate(bloodSplatterVFX, contactPoint, Quaternion.identity);
+            }
+            //  ELSE, USE THE GENERIC (DEFAULT VERSION) WE HAVE ELSEWHERE
+            else
+            {
+                GameObject bloodSplatter = Instantiate(WorldCharacterEffectsManager.instance.bloodSplatterVFX, contactPoint, Quaternion.identity);
+            }
         }
     }
 }
