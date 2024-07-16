@@ -175,6 +175,38 @@ namespace SG
             
             
         }
+        
+        //  DAMAGE COLLIDERS
+        public void OpenDamageCollider()
+        {
+            //  OPEN RIGHT WEAPON DAMAGE COLLIDER
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                rightWeaponManager.meleeWeaponDamageCollider.EnableDamageCollider();
+            }
+            //  OPEN LEFT WEAPON DAMAGE COLLIDER
+            else if (player.playerNetworkManager.isUsingLeftHand.Value)
+            {
+                leftWeaponManager.meleeWeaponDamageCollider.EnableDamageCollider();
+            }
+            
+            //  PLAY WHOOSH SFX
+        }
+        
+        public void CloseDamageCollider()
+        {
+            //  OPEN RIGHT WEAPON DAMAGE COLLIDER
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                rightWeaponManager.meleeWeaponDamageCollider.DisableDamageCollider();
+            }
+            //  OPEN LEFT WEAPON DAMAGE COLLIDER
+            else if (player.playerNetworkManager.isUsingLeftHand.Value)
+            {
+                leftWeaponManager.meleeWeaponDamageCollider.DisableDamageCollider();
+            }
+            
+        }
     }
 }
 

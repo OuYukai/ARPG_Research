@@ -124,7 +124,7 @@ namespace SG
             character.characterNetworkManager.NotfyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
         
-        public virtual void PlayerTargetAttackActionAnimation(
+        public virtual void PlayerTargetAttackActionAnimation(AttackType attackType,
             string targetAnimation, 
             bool isPerformingAction, 
             bool applyRootMotion = true, 
@@ -136,7 +136,7 @@ namespace SG
             //  UPDATE ANIMATION SET TO CURRENT WEAPONS ANIMATIONS
             //  DECIDE IF OUR ATTACK CAN BE PARRIED
             //  TELL THE NETWORK OUR "ISATTACKING" FLAG IS ACTIVE (For counter damage ect)
-            
+            character.characterCombatManager.currentAttackType = attackType;
             character.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
             character.isPerformingAction = isPerformingAction;

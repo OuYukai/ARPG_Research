@@ -18,6 +18,7 @@ namespace SG
         [HideInInspector] public CharacterNetworkManager characterNetworkManager;
         [HideInInspector] public CharacterEffectManager characterEffectManager;
         [HideInInspector] public CharaterAnimatorManager charaterAnimatorManager;
+        [HideInInspector] public CharacterCombatManager characterCombatManager;
 
         [Header("Flags")]
         public bool isPerformingAction = false;
@@ -38,6 +39,7 @@ namespace SG
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
             characterEffectManager = GetComponent<CharacterEffectManager>();
             charaterAnimatorManager = GetComponent<CharaterAnimatorManager>();
+            characterCombatManager = GetComponent<CharacterCombatManager>();
         }
 
         protected virtual void Start()
