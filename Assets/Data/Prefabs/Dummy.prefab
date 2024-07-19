@@ -311,16 +311,16 @@ GameObject:
   - component: {fileID: 6940421712201392090}
   - component: {fileID: 3736499491519369648}
   - component: {fileID: 8497467849942766164}
-  - component: {fileID: 624655315095115015}
-  - component: {fileID: 1058984055464939859}
-  - component: {fileID: 1294106878265892237}
-  - component: {fileID: 8133603453851327161}
-  - component: {fileID: 6863704539896326521}
-  - component: {fileID: 3294979180183780871}
-  - component: {fileID: 38153351226947405}
-  - component: {fileID: 3452274969585871735}
-  - component: {fileID: 106447234651277135}
-  - component: {fileID: 4663632700411096712}
+  - component: {fileID: 2382123676965776450}
+  - component: {fileID: 5933703231428286057}
+  - component: {fileID: 5048021358227647889}
+  - component: {fileID: 1444608536960612025}
+  - component: {fileID: 5356062995652194516}
+  - component: {fileID: 5490638272066973739}
+  - component: {fileID: 1907999609125695490}
+  - component: {fileID: 5529832249782238902}
+  - component: {fileID: 5615077914297483075}
+  - component: {fileID: 5800826408671762698}
   - component: {fileID: 3937708324328520063}
   - component: {fileID: 2947228306067640701}
   - component: {fileID: 7348406839689051159}
@@ -340,7 +340,7 @@ Transform:
   m_GameObject: {fileID: 1078832951421742993}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -389,7 +389,7 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &624655315095115015
+--- !u!114 &2382123676965776450
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078832951421742993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 876ac73b7693be142ac47ee3d2189d72, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f7487946347a0f4f9514ffdf27d8ebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   networkPosition:
@@ -413,6 +413,8 @@ MonoBehaviour:
   verticalMovement:
     m_InternalValue: 0
   moveAmount:
+    m_InternalValue: 0
+  currentTargetNetworkObjectID:
     m_InternalValue: 0
   isLockedOn:
     m_InternalValue: 0
@@ -432,86 +434,7 @@ MonoBehaviour:
     m_InternalValue: 10
   endurance:
     m_InternalValue: 10
-  characterName:
-    m_InternalValue:
-      utf8LengthInBytes: 9
-      bytes:
-        offset0000:
-          byte0000: 67
-          byte0001: 104
-          byte0002: 97
-          byte0003: 114
-          byte0004: 97
-          byte0005: 99
-          byte0006: 116
-          byte0007: 101
-          byte0008: 114
-          byte0009: 0
-          byte0010: 0
-          byte0011: 0
-          byte0012: 0
-          byte0013: 0
-          byte0014: 0
-          byte0015: 0
-        offset0016:
-          byte0000: 0
-          byte0001: 0
-          byte0002: 0
-          byte0003: 0
-          byte0004: 0
-          byte0005: 0
-          byte0006: 0
-          byte0007: 0
-          byte0008: 0
-          byte0009: 0
-          byte0010: 0
-          byte0011: 0
-          byte0012: 0
-          byte0013: 0
-          byte0014: 0
-          byte0015: 0
-        offset0032:
-          byte0000: 0
-          byte0001: 0
-          byte0002: 0
-          byte0003: 0
-          byte0004: 0
-          byte0005: 0
-          byte0006: 0
-          byte0007: 0
-          byte0008: 0
-          byte0009: 0
-          byte0010: 0
-          byte0011: 0
-          byte0012: 0
-          byte0013: 0
-          byte0014: 0
-          byte0015: 0
-        byte0048: 0
-        byte0049: 0
-        byte0050: 0
-        byte0051: 0
-        byte0052: 0
-        byte0053: 0
-        byte0054: 0
-        byte0055: 0
-        byte0056: 0
-        byte0057: 0
-        byte0058: 0
-        byte0059: 0
-        byte0060: 0
-        byte0061: 0
-  currentWeaponBeingUsed:
-    m_InternalValue: 0
-  currentRightHandWeaponID:
-    m_InternalValue: 0
-  currentLeftHandWeaponID:
-    m_InternalValue: 0
-  isUsingRightHand:
-    m_InternalValue: 0
-  isUsingLeftHand:
-    m_InternalValue: 0
---- !u!114 &1058984055464939859
+--- !u!114 &5933703231428286057
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -520,7 +443,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078832951421742993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aaed3a97fb11ec4b9bf4ca5200ccff2, type: 3}
+  m_Script: {fileID: 11500000, guid: d65f86bbd63c7074ca6e9ae58db29195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isDead:
@@ -537,16 +460,7 @@ MonoBehaviour:
   applyRootMotion: 0
   canMove: 1
   canRotate: 1
-  respwnCharacter: 0
-  switchRightWeapon: 0
-  playerAnimatorManager: {fileID: 0}
-  playerLocomotionManager: {fileID: 0}
-  playerNetworkManager: {fileID: 0}
-  playerStatsManager: {fileID: 0}
-  playerInventoryManager: {fileID: 0}
-  playerEquipmentManager: {fileID: 0}
-  playerCombatManager: {fileID: 0}
---- !u!114 &1294106878265892237
+--- !u!114 &5048021358227647889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -555,14 +469,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078832951421742993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7d0744c1d36b8499f00f58cc5e6eb7, type: 3}
+  m_Script: {fileID: 11500000, guid: 9369843e0735e3c4bb0ed6959d4f838a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 8209279172845079107}
-  currentWeaponBeingUsed: {fileID: 0}
---- !u!114 &8133603453851327161
+--- !u!114 &1444608536960612025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -571,12 +484,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078832951421742993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2c35d3a3f51748428b1be86e0e0837b, type: 3}
+  m_Script: {fileID: 11500000, guid: cd78e57909e6a3a4188c6ee342ee122a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   staminaRegenerationAmount: 2
   staminaRegenerationDelay: 2
---- !u!114 &6863704539896326521
+--- !u!114 &5356062995652194516
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -585,31 +498,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078832951421742993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34ae99051388504478029f369e8073b2, type: 3}
+  m_Script: {fileID: 11500000, guid: e60e40660ef9ded4e85c57e7fe0d9041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityForce: -40
+  gravityForce: -5.55
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  groundCheckSphereRadius: 0.35
+  groundCheckSphereRadius: 1
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -5
-  verticalMovement: 0
-  horizontalMovement: 0
-  moveAmount: 0
-  walkingSpeed: 2
-  runningSpeed: 5
-  sprintingSpeed: 10
-  rotationSpeed: 15
-  sprintingStaminaCost: 2
-  dodgeStaminaCost: 25
-  jumpStaminaCost: 25
-  jumpHeight: 4
-  jumpForwardSpeed: 5
-  freeFallSpeed: 2
---- !u!114 &3294979180183780871
+--- !u!114 &5490638272066973739
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -618,24 +518,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078832951421742993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f50c57c77a30614b9f5b1393577a671, type: 3}
+  m_Script: {fileID: 11500000, guid: ff2fb4aae91ffca48a84a861353e05e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRightHandWeapon: {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff,
-    type: 2}
-  currentLeftHandWeapon: {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff,
-    type: 2}
-  weaponsInRightHandSlots:
-  - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
-  - {fileID: 11400000, guid: c9190bc3cfd1ed341956be1bcff1c764, type: 2}
-  - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
-  rightHandWeaponIndex: 0
-  weaponsInLeftHandSlots:
-  - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
-  - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
-  - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
-  leftHandWeaponIndex: 0
---- !u!114 &38153351226947405
+--- !u!114 &1907999609125695490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -644,16 +530,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078832951421742993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0975fd5919d340f4fa66c6d2e8424ce8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a749c97172f5f544a777188b95f6229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightHandSlot: {fileID: 0}
-  leftHandSlot: {fileID: 0}
-  rightWeaponManager: {fileID: 0}
-  leftWeaponManager: {fileID: 0}
-  rightHandWeaponModel: {fileID: 0}
-  leftHandWeaponModel: {fileID: 0}
---- !u!114 &3452274969585871735
+--- !u!114 &5529832249782238902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -662,7 +542,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078832951421742993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6af31c40e7d00e4eb12ecf2aa4e49b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a170d12cddd6b04c8d96d4e29089a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lastDamageAnimationPlayed: 
@@ -678,7 +558,7 @@ MonoBehaviour:
   backward_Medium_Damage: []
   left_Medium_Damage: []
   right_Medium_Damage: []
---- !u!114 &106447234651277135
+--- !u!114 &5615077914297483075
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -687,10 +567,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078832951421742993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b67602990c5d51b4eb7901926960fa42, type: 3}
+  m_Script: {fileID: 11500000, guid: f97f63bce1548044baeda7ab49b4df3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4663632700411096712
+--- !u!114 &5800826408671762698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -699,12 +579,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078832951421742993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3de3c35823351034588fc56a6166d9b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 567e122a52ee49d4d9275caed3f4c6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bloodSplatterVFX: {fileID: 0}
-  effectToTest: {fileID: 11400000, guid: b86ee71040998734eaa97d54063f344d, type: 2}
-  processEffect: 0
 --- !u!143 &3937708324328520063
 CharacterController:
   m_ObjectHideFlags: 0

@@ -74,6 +74,9 @@ namespace SG
             if (!character.IsOwner)
                 return;
             
+            if (character.isDead.Value)
+                return;
+            
             if (characterCausingDamage != null)
             {
                 //  CHECK FOR DAMAGE MODIFIERS AND MODIFY BASE DAMAGE (PHYSICAL/ELEMENTAL DAMAGE BUFF)
