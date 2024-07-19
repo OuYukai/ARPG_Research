@@ -22,17 +22,20 @@ namespace SG
         public float horizontalInput;
         public float moveAmount;
 
+        [Header("LOCK ON INPUT")] 
+        [SerializeField] bool lockOn_Input;
+        
         [Header("CAMERA MOVEMENT INPUT")]
         [SerializeField] Vector2 cameraInput;
         public float cameraVerticalInput;
         public float cameraHorizontalInput;
 
-        [Header("PLATER ACTION INPUT")]
+        [Header("PLAYER ACTION INPUT")]
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
         [SerializeField] bool RB_Input = false;
-
+        
         private void Awake()
         {
             if (instance == null)
@@ -97,6 +100,9 @@ namespace SG
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
+                
+                //  LOCK ON
+                playerControls.PlayerActions.LockOn.performed += i => lockOn_Input = true;
 
                 //  HOLDING THE INPUT, SETS THE BOOL TO TRUE
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -136,12 +142,47 @@ namespace SG
 
         private void HandleAllInputs()
         {
+            HandleLockOnInput();
             HandlePlayerMovementInput();
             HandleCameraMovementInput();
             HandleDodgeInput();
             HandleSprinting();
             HandleJumpInput();
             HandleRBInput();
+        }
+        
+        //  LOCK ON
+        private void HandleLockOnInput()
+        {
+            //  CHECK FOR DEAD TARGET
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
+                if (player.playerCombatManager.currentTarget == null)
+                    return;
+
+                if (player.playerCombatManager.currentTarget.isDead.Value)
+                {
+                    player.playerNetworkManager.isLockedOn.Value = false;
+                }
+                //  ATTEMPT TO FIND NEW TARGET
+            }
+            
+            if (lockOn_Input && player.playerNetworkManager.isLockedOn.Value)
+            {
+                lockOn_Input = false;
+                //  DISABLE LOCK ON
+                return;
+            }
+            
+            if (lockOn_Input && !player.playerNetworkManager.isLockedOn.Value)
+            {
+                lockOn_Input = false;
+                
+                //  IF WE ARE AIMING USING RANGE WEAPONS RETURN (DO NOT ALLOW LOCK WHILST AIMING)
+                
+                //  ENABLE LOCK ON
+                PlayerCamera.instance.HandleLocatingLockOnTargets();
+            }
         }
 
         //  MOVEMENT

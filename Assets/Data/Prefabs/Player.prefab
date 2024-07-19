@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2822956236322381805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7781202885069230343}
+  m_Layer: 7
+  m_Name: Lock On Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7781202885069230343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822956236322381805}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.1790373, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8192991380260598552}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7407585849279448704
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +448,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -7011284792763705418, guid: 41cc18317a6173a4680a162bddf2d6bd,
+        type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 7781202885069230343}
     - targetCorrespondingSourceObject: {fileID: 3780837713738550241, guid: 41cc18317a6173a4680a162bddf2d6bd,
         type: 3}
       insertIndex: -1
@@ -995,6 +1030,8 @@ MonoBehaviour:
     m_InternalValue: 0
   moveAmount:
     m_InternalValue: 0
+  isLockedOn:
+    m_InternalValue: 0
   isSprinting:
     m_InternalValue: 0
   isJumping:
@@ -1110,6 +1147,7 @@ MonoBehaviour:
   characterEffectManager: {fileID: 0}
   charaterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
+  characterSoundFXManager: {fileID: 0}
   isPerformingAction: 0
   isGrounded: 1
   applyRootMotion: 0
@@ -1136,7 +1174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7d0744c1d36b8499f00f58cc5e6eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTarget: {fileID: 0}
   currentAttackType: 0
+  lockOnTransform: {fileID: 7781202885069230343}
   currentWeaponBeingUsed: {fileID: 0}
 --- !u!114 &5178624589769210393
 MonoBehaviour:
@@ -1241,6 +1281,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6af31c40e7d00e4eb12ecf2aa4e49b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastDamageAnimationPlayed: 
+  hit_Forward_Medium_01: Hit_Forward_Medium_01
+  hit_Forward_Medium_02: Hit_Forward_Medium_02
+  hit_Backward_Medium_01: Hit_Backward_Medium_01
+  hit_Backward_Medium_02: Hit_Backward_Medium_02
+  hit_Left_Medium_01: Hit_Left_Medium_01
+  hit_Left_Medium_02: Hit_Left_Medium_02
+  hit_Right_Medium_01: Hit_Right_Medium_01
+  hit_Right_Medium_02: Hit_Right_Medium_02
+  forward_Medium_Damage: []
+  backward_Medium_Damage: []
+  left_Medium_Damage: []
+  right_Medium_Damage: []
 --- !u!114 &2318973151410449362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1504,6 +1557,12 @@ CapsuleCollider:
   m_Height: 0.35
   m_Direction: 0
   m_Center: {x: 0.15, y: 0, z: 0}
+--- !u!4 &8192991380260598552 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7011284792763705418, guid: 41cc18317a6173a4680a162bddf2d6bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 7998872189325386926}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8738657112735030807 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7618892409413387591, guid: 41cc18317a6173a4680a162bddf2d6bd,
