@@ -20,6 +20,7 @@ namespace SG
         [HideInInspector] public CharaterAnimatorManager charaterAnimatorManager;
         [HideInInspector] public CharacterCombatManager characterCombatManager;
         [HideInInspector] public CharacterSoundFXManager characterSoundFXManager;
+        [HideInInspector] public CharacterLocomotionManager characterLocomotionManager;
 
         [Header("Flags")]
         public bool isPerformingAction = false;
@@ -42,6 +43,7 @@ namespace SG
             charaterAnimatorManager = GetComponent<CharaterAnimatorManager>();
             characterCombatManager = GetComponent<CharacterCombatManager>();
             characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
+            characterLocomotionManager = GetComponent<CharacterLocomotionManager>();
         }
 
         protected virtual void Start()

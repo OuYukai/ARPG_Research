@@ -18,6 +18,9 @@ namespace SG
         [SerializeField] protected float fallStartYVelocity = -5; // THE FORCE AT WHICH OUR CHARACTER BEGINS TO FALL WHEN THEY BECOM UNGROUNDED ( RISES AS THEY FALL LONGER )
         protected bool fallingVelocityHasBeenSet = false;
         protected float inAirTimer = 0;
+
+        [Header("Flags")] 
+        public bool isRolling = false;
         
         protected virtual void Awake()
         {

@@ -24,6 +24,9 @@ namespace SG
 
         [Header("LOCK ON INPUT")] 
         [SerializeField] bool lockOn_Input;
+        [SerializeField] bool lockOn_Left_Input;
+        [SerializeField] bool lockOn_Right_Input;
+        private Coroutine lockOnCoroutine;
         
         [Header("CAMERA MOVEMENT INPUT")]
         [SerializeField] Vector2 cameraInput;
@@ -103,6 +106,8 @@ namespace SG
                 
                 //  LOCK ON
                 playerControls.PlayerActions.LockOn.performed += i => lockOn_Input = true;
+                playerControls.PlayerActions.SeekLeftLockOnTarget.performed += i => lockOn_Left_Input = true;
+                playerControls.PlayerActions.SeekRightLockOnTarget.performed += i => lockOn_Right_Input = true;
 
                 //  HOLDING THE INPUT, SETS THE BOOL TO TRUE
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -143,6 +148,7 @@ namespace SG
         private void HandleAllInputs()
         {
             HandleLockOnInput();
+            HandleLockOnSwitchTargetInput();
             HandlePlayerMovementInput();
             HandleCameraMovementInput();
             HandleDodgeInput();
@@ -164,7 +170,14 @@ namespace SG
                 {
                     player.playerNetworkManager.isLockedOn.Value = false;
                 }
+                
                 //  ATTEMPT TO FIND NEW TARGET
+                
+                //  THIS ASSURES US THAT THE COROUTINE NEVER RUNS MULTIPLE OVERLAPPING ITSELE
+                if (lockOnCoroutine != null)
+                    StopCoroutine(lockOnCoroutine);
+
+                lockOnCoroutine = StartCoroutine(PlayerCamera.instance.WaitThenFindNewTarget());
             }
             
             if (lockOn_Input && player.playerNetworkManager.isLockedOn.Value)
@@ -195,6 +208,39 @@ namespace SG
             }
         }
 
+        private void HandleLockOnSwitchTargetInput()
+        {
+            if (lockOn_Left_Input)
+            {
+                lockOn_Left_Input = false;
+
+                if (player.playerNetworkManager.isLockedOn.Value)
+                {
+                    PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                    if (PlayerCamera.instance.leftLockOnTarget != null)
+                    {
+                        player.playerCombatManager.SetTarget(PlayerCamera.instance.leftLockOnTarget);
+                    }
+                }
+            }
+            
+            if (lockOn_Right_Input)
+            {
+                lockOn_Right_Input = false;
+
+                if (player.playerNetworkManager.isLockedOn.Value)
+                {
+                    PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                    if (PlayerCamera.instance.rightLockOnTarget != null)
+                    {
+                        player.playerCombatManager.SetTarget(PlayerCamera.instance.rightLockOnTarget);
+                    }
+                }
+            }
+        }
+
         //  MOVEMENT
         private void HandlePlayerMovementInput()
         {
@@ -221,7 +267,14 @@ namespace SG
                 return;
 
             //  IF WE ARE NOT LOCKED ON, ONLY USE THE MOVE AMOUNT
-            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+            if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
+            {
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+            }
+            else
+            {
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
+            }
 
             //  IF WE ARE LOCKED ON PASS THE HORIZONTAL MOVEMENT AS WELL
         }

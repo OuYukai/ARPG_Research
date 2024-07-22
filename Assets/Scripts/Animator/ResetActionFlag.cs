@@ -21,6 +21,7 @@ namespace SG
             character.applyRootMotion = false;
             character.canMove = true;
             character.canRotate = true;
+            character.characterLocomotionManager.isRolling = false;
 
             if (character.IsOwner)
             {
