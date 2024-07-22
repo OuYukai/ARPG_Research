@@ -72,7 +72,7 @@ namespace SG
             finalList.Remove(lastDamageAnimationPlayed);
             
             //  CHECK THE LIST FOR NULL ENTRIES, AND REMOVE THEM
-            for (int i = finalList.Count; i > -1; i--)
+            for (int i = finalList.Count - 1 ; i > -1; i--)
             {
                 if (finalList[i] == null)
                     finalList.RemoveAt(i);

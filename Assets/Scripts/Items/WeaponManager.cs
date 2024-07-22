@@ -24,6 +24,8 @@ namespace SG
             meleeWeaponDamageCollider.holyDamage = weaponItem.holyDamage;
 
             meleeWeaponDamageCollider.light_Attack_01_Modifiers = weaponItem.light_Attack_01_Modifier;
+            meleeWeaponDamageCollider.heavy_Attack_01_Modifiers = weaponItem.heavy_Attack_01_Modifier;
+            meleeWeaponDamageCollider.charge_Attack_01_Modifiers = weaponItem.charge_Attack_01_Modifier;
         }
     }
 }

@@ -35,6 +35,9 @@ namespace SG
         public float light_Attack_01_Modifier = 1.1f;
         
         //  HEAVY ATTACK MODIFIERS
+        public float heavy_Attack_01_Modifier = 1.4f;
+        public float charge_Attack_01_Modifier = 2f;
+        
         //  CRITICAL DAMAGE MODIFIERS ECT
 
         [Header("Stamina Cost Modifiers")] 
@@ -49,6 +52,7 @@ namespace SG
         //  ITEM BASE ACTIONS (RB, RT, LB, LT)
         [Header("Actions")] 
         public WeaponItemAction oh_RB_Action;   //  ONE HAND RIGHT BUMPER ACTION
+        public WeaponItemAction oh_RT_Action;   //  ONE HAND RIGHT TRIGGER ACTION
 
         //  ASH OF WAR 
 

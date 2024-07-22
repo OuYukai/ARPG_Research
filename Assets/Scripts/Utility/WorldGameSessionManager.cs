@@ -33,7 +33,7 @@ namespace SG
             }
             
             //  CHECK THE LIST FOR NULL SLOTS, AND REMOVE THE NULL SLOTS
-            for (int i = players.Count; i > -1; i--)
+            for (int i = players.Count -1 ; i > -1; i--)
             {
                 if (players[i] == null)
                 {
