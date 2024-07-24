@@ -78,7 +78,7 @@ namespace SG
             if (!player.IsOwner)
                 return;
             
-            player.playerAnimatorManager.PlayerTargetActionAnimation("Swap_Right_Weapon_01", false, true, true, true);
+            player.playerAnimatorManager.PlayerTargetActionAnimation("Swap_Right_Weapon_01", false, false, true, true);
             
             //  ELDEN RINGS WEAPON SWAPPING
             //  1. Check if we have another weapon besides our main weapon, if we do, NEVER swap to unarmed, rotate between weapon 1 and 2
@@ -172,6 +172,79 @@ namespace SG
         {
             if (!player.IsOwner)
                 return;
+            
+            player.playerAnimatorManager.PlayerTargetActionAnimation("Swap_Left_Weapon_01", false, false, true, true);
+            
+            //  ELDEN RINGS WEAPON SWAPPING
+            //  1. Check if we have another weapon besides our main weapon, if we do, NEVER swap to unarmed, rotate between weapon 1 and 2
+            //  2. If we don't, swap to unarmed, then SKIP the other empty slot and swap back. Do not process both empty slots before returning to main weapon 
+
+            WeaponItem selectedWeapon = null;
+            
+            //  DISABLE TWO HANDING IF WE ARE TWO HANDING
+            //  CHECK OUR WEAPON INDEX (WE HAVE 3 SLOT, SO THAT 3 POSSIBLE NUMBERS)
+            
+            //  ADD ONE TO OUR INDEX TO SWITCH TO THE NEXT POTENTIAL WEAPON
+            player.playerInventoryManager.leftHandWeaponIndex += 1;
+            
+            //  IF OUR INDEX IS OUT OF BOUNDS, RESET IT TO POSITION #1 (0)
+            if (player.playerInventoryManager.leftHandWeaponIndex < 0 || player.playerInventoryManager.leftHandWeaponIndex > 2)
+            {
+                player.playerInventoryManager.leftHandWeaponIndex = 0;
+                
+                //  WE CHECK IF WE ARE HOLDING MORE THAN ONE WEAPON
+                float weaponCount = 0;
+                WeaponItem firstWeapon = null;
+                int firstWeaponPosition = 0;
+
+                for (int i = 0; i < player.playerInventoryManager.weaponsInLeftHandSlots.Length; i++)
+                {
+                    if (player.playerInventoryManager.weaponsInLeftHandSlots[i].itemID != WorldItemDatabase.instance.unarmedWeapon.itemID)
+                    {
+                        weaponCount += 1;
+
+                        if (firstWeapon == null)
+                        {
+                            firstWeapon = player.playerInventoryManager.weaponsInLeftHandSlots[i];
+                            firstWeaponPosition = i;
+                        }
+                    }
+                }
+
+                if (weaponCount <= 1)
+                {
+                    player.playerInventoryManager.leftHandWeaponIndex = -1;
+                    selectedWeapon = WorldItemDatabase.instance.unarmedWeapon;
+                    player.playerNetworkManager.currentLeftHandWeaponID.Value = selectedWeapon.itemID;
+                }
+                else
+                {
+                    player.playerInventoryManager.leftHandWeaponIndex = firstWeaponPosition;
+                    player.playerNetworkManager.currentLeftHandWeaponID.Value = firstWeapon.itemID;
+                }
+                
+                return;
+            }
+            
+            foreach (WeaponItem weapon in player.playerInventoryManager.weaponsInLeftHandSlots)
+            {
+                //  CHECK TO SEE IF THIS IS NOT THE "UNARMED" WEAPON
+                //  IF THE NEXT POTENTIAL WEAPON DOES NOT EQUAL THE UNARMED WEAPON
+                if (player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex].itemID != WorldItemDatabase.instance.unarmedWeapon.itemID)
+                {
+                    selectedWeapon =
+                        player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex];
+                    //  ASSIGN THE NETWORK ID SO IT SWITCHES FOR ALL CONNECTED CLIENTS
+
+                    player.playerNetworkManager.currentLeftHandWeaponID.Value = player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex].itemID;
+                    return;
+                }
+            }
+
+            if (selectedWeapon == null && player.playerInventoryManager.leftHandWeaponIndex <= 2)
+            {
+                SwitchLeftWeapon();
+            }
             
             
         }

@@ -997,7 +997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3910753694
+  GlobalObjectIdHash: 951099334
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -1159,7 +1159,6 @@ MonoBehaviour:
   canMove: 1
   canRotate: 1
   respwnCharacter: 0
-  switchRightWeapon: 0
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
   playerNetworkManager: {fileID: 0}
@@ -1254,7 +1253,7 @@ MonoBehaviour:
   rightHandWeaponIndex: 0
   weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
-  - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
+  - {fileID: 11400000, guid: c9190bc3cfd1ed341956be1bcff1c764, type: 2}
   - {fileID: 11400000, guid: af536243e6004b241b5315a4bbe78cff, type: 2}
   leftHandWeaponIndex: 0
 --- !u!114 &-6542499188051978762

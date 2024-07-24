@@ -141,6 +141,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Switch Right Weapon",
+                    "type": "Button",
+                    "id": "76802798-6841-40ef-a8f1-b3e732bdb5ee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Switch Left Weapon",
+                    "type": "Button",
+                    "id": "f8408f98-2ba4-4b35-a148-5c7d07464556",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Seek Left Lock On Target",
                     "type": "Button",
                     "id": "3fbaf4a6-c134-40ad-8f33-985b40a03066",
@@ -256,6 +274,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Hold RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e18e3d7f-1562-4d88-a146-be6617adb41a",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Right Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aed6a34f-8041-4c23-8716-4c5dc9dc5a4d",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Left Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

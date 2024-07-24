@@ -12,7 +12,7 @@ namespace SG
     {
         [Header("DEBUG MENU")] 
         [SerializeField] private bool respwnCharacter = false;
-        [SerializeField] private bool switchRightWeapon = false;
+        //[SerializeField] private bool switchRightWeapon = false;
         
         [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
@@ -252,11 +252,11 @@ namespace SG
                 ReviveCharacter();
             }
 
-            if (switchRightWeapon)
-            {
-                switchRightWeapon = false;
-                playerEquipmentManager.SwitchRightWeapon();
-            }
+            //if (switchRightWeapon)
+            //{
+            //    switchRightWeapon = false;
+            //    playerEquipmentManager.SwitchRightWeapon();
+            //}
         }
     }
 }
