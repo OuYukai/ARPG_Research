@@ -11,6 +11,10 @@ namespace SG
         
         public WeaponItem currentWeaponBeingUsed;
 
+        [Header("Flags")] 
+        public bool canComboWithMainHandWeapon = false;
+        //public bool canComboWithOffHandWeapon = false;
+
         protected override void Awake()
         {
             base.Awake();
@@ -62,6 +66,7 @@ namespace SG
                 PlayerCamera.instance.SetLockCameraHeight();
             }
         }
+        
     }
 }
 

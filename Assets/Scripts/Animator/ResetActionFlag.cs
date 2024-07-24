@@ -22,6 +22,7 @@ namespace SG
             character.canMove = true;
             character.canRotate = true;
             character.characterLocomotionManager.isRolling = false;
+            character.charaterAnimatorManager.DisableCanCombo();
 
             if (character.IsOwner)
             {

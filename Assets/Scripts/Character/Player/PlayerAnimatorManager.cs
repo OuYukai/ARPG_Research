@@ -25,6 +25,25 @@ namespace SG
                 player.transform.rotation *= player.animator.deltaRotation;
             }
         }
+        
+        //  ANIMATION EVENT CALLS
+        public override void EnableCanCombo()
+        {
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                player.playerCombatManager.canComboWithMainHandWeapon = true;
+            }
+            else
+            {
+                //  ENABLE OFF HAND COMBO
+            }
+        }
+        
+        public override void DisableCanCombo()
+        {
+            player.playerCombatManager.canComboWithMainHandWeapon = false;
+            //player.playerCombatManager.canComboWithOffHandWeapon = false
+        }
     }
 }
 
