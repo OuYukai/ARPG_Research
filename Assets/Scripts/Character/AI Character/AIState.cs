@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIState : MonoBehaviour
+namespace SG
 {
-    // Start is called before the first frame update
-    void Start()
+    public class AIState : ScriptableObject
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public virtual AIState Tick(AICharacterManager aiCharacter)
+        {
+            
+            //  DO SOME LOGIC TO FIND THE PLAYER
+            //  IF WE HAVE FOUND THE PLAYER, RETURN THE PURSUE TARGET STATE INSTEAD
+            //  IF WE HAVE NOT FOUND THE PLAYER, CONTINUE TO RETURN THE IDLE STATE
+            
+            return this;
+        }
     }
 }
+

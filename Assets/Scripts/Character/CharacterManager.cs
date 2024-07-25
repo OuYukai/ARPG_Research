@@ -22,9 +22,11 @@ namespace SG
         [HideInInspector] public CharacterSoundFXManager characterSoundFXManager;
         [HideInInspector] public CharacterLocomotionManager characterLocomotionManager;
 
+        [Header("Character Group")] 
+        public CharacterGroup characterGroup;
+
         [Header("Flags")]
         public bool isPerformingAction = false;
-        //public bool isJumping = false;
         public bool isGrounded = true;
         public bool applyRootMotion = false;
         public bool canMove = true;
@@ -76,6 +78,11 @@ namespace SG
                     characterNetworkManager.networkRotation.Value, 
                     characterNetworkManager.networkRotationSmoothTime);
             }
+        }
+
+        protected virtual void FixedUpdate()
+        {
+            
         }
 
         protected virtual void LateUpdate()

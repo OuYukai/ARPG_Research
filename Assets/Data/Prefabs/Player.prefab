@@ -1153,6 +1153,7 @@ MonoBehaviour:
   characterCombatManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
   characterLocomotionManager: {fileID: 0}
+  characterGroup: 0
   isPerformingAction: 0
   isGrounded: 1
   applyRootMotion: 0
@@ -1178,10 +1179,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7d0744c1d36b8499f00f58cc5e6eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastAttackAnimationPerformed: 
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 7781202885069230343}
   currentWeaponBeingUsed: {fileID: 0}
+  canComboWithMainHandWeapon: 0
 --- !u!114 &5178624589769210393
 MonoBehaviour:
   m_ObjectHideFlags: 0
