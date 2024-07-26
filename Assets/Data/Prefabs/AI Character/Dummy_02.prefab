@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: -3316189178845524022}
   - component: {fileID: 5490638272066973739}
   - component: {fileID: 1907999609125695490}
-  - component: {fileID: 5529832249782238902}
+  - component: {fileID: -4806773814450238748}
   - component: {fileID: 5615077914297483075}
   - component: {fileID: 5800826408671762698}
   - component: {fileID: 3937708324328520063}
@@ -359,7 +359,7 @@ Animator:
   m_GameObject: {fileID: 1078832951421742993}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 41cc18317a6173a4680a162bddf2d6bd, type: 3}
-  m_Controller: {fileID: 9100000, guid: 2505e80ee180e074984bfcecf3bd7747, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3825a045b968802408ddf1e60254d325, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -490,6 +490,8 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 8209279172845079107}
+  viewableAngle: 0
+  targetDirection: {x: 0, y: 0, z: 0}
   detectionRadius: 15
   minimumDetectionAngle: -35
   maximumDetectionAngle: 35
@@ -522,7 +524,7 @@ MonoBehaviour:
   gravityForce: -5.55
   groundLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1
   groundCheckSphereRadius: 1
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
@@ -552,7 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a749c97172f5f544a777188b95f6229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5529832249782238902
+--- !u!114 &-4806773814450238748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -561,7 +563,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078832951421742993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a170d12cddd6b04c8d96d4e29089a69, type: 3}
+  m_Script: {fileID: 11500000, guid: 144b5639277a408ca65dc22ff296dd13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lastDamageAnimationPlayed: 

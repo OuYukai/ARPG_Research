@@ -44,7 +44,8 @@ namespace SG
         {
             base.FixedUpdate();
             
-            ProcessStateMachine();
+            if(IsOwner)
+                ProcessStateMachine();
         }
 
         private void ProcessStateMachine()
@@ -59,6 +60,12 @@ namespace SG
             //  THE POSITION/ROTATION SHOULD BE RESET ONLY AFTER THE STATE MACHINE HAS PROCESSED IT'S TICK
             navMeshAgent.transform.localPosition = Vector3.zero;
             navMeshAgent.transform.localRotation = Quaternion.identity;
+
+            if (aiCharacterCombatManager.currentTarget != null)
+            {
+                aiCharacterCombatManager.targetDirection = aiCharacterCombatManager.currentTarget.transform.position - transform.position;
+                aiCharacterCombatManager.viewableAngle = WorldUtilityManager.instance.GetAngleOfTarget(transform, aiCharacterCombatManager.targetDirection);
+            }
             
             if (navMeshAgent.enabled)
             {

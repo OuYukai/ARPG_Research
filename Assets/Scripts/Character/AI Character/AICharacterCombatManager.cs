@@ -1,13 +1,18 @@
-﻿using UnityEngine;
+﻿using UnityEditor.ShaderGraph.Internal;
+using UnityEngine;
 
 namespace SG
 {
     public class AICharacterCombatManager : CharacterCombatManager
     {
+        [Header("Target Information")] 
+        public float viewableAngle;
+        public Vector3 targetDirection;
+        
         [Header("Detection")] 
-        [SerializeField] float detectionRadius = 15;
-        [SerializeField] private float minimumDetectionAngle = -35;
-        [SerializeField] private float maximumDetectionAngle = 35;
+        public float detectionRadius = 15;
+        public float minimumDetectionAngle = -35;
+        public float maximumDetectionAngle = 35;
         
         public void FindATargetViaLineOfSight(AICharacterManager aiCharacter)
         {
@@ -34,9 +39,9 @@ namespace SG
                 {
                     //  IF A POTENTIAL TARGET IS FOUND, IT HAS TO BE IN FRONT OF US
                     Vector3 targetsDirection = targetCharacter.transform.position - aiCharacter.transform.position;
-                    float viewableAngle = Vector3.Angle(targetsDirection, aiCharacter.transform.forward);
+                    float angleOfTarget = Vector3.Angle(targetsDirection, aiCharacter.transform.forward);
 
-                    if (viewableAngle > minimumDetectionAngle && viewableAngle < maximumDetectionAngle)
+                    if (angleOfTarget > minimumDetectionAngle && angleOfTarget < maximumDetectionAngle)
                     {
                         //  LASTLY, WE CHECK FOR ENVIRO BLOCKS
                         if (Physics.Linecast(
@@ -45,16 +50,59 @@ namespace SG
                                 WorldUtilityManager.instance.GetEnviroLayerMask()))
                         {
                             Debug.DrawLine(aiCharacter.characterCombatManager.lockOnTransform.position, targetCharacter.characterCombatManager.lockOnTransform.position);
-                            Debug.Log("BLOCKED");
                         }
                         else
                         {
+                            targetsDirection = targetCharacter.transform.position - transform.position;
+                            viewableAngle = WorldUtilityManager.instance.GetAngleOfTarget(transform, targetsDirection);
                             aiCharacter.characterCombatManager.SetTarget(targetCharacter);
+                            PivotTowardsTarget(aiCharacter);
                         }
                     }
                 }
                 
             }
+        }
+
+        public void PivotTowardsTarget(AICharacterManager aiCharacter)
+        {
+            //  PLAY A PIVOT ANIMATION DEPENDING ON VIEWABLE ANGLE OF TARGET
+            if (aiCharacter.isPerformingAction)
+                return;
+
+            if (viewableAngle >= 20 && viewableAngle <= 60)
+            {
+                aiCharacter.charaterAnimatorManager.PlayerTargetActionAnimation("Turn_R_45_01", true);
+            }
+            else if (viewableAngle <= -20 && viewableAngle >= -60)
+            {
+                aiCharacter.charaterAnimatorManager.PlayerTargetActionAnimation("Turn_L_45_01", true);
+            }
+            else if (viewableAngle >= 61 && viewableAngle <= 110)
+            {
+                aiCharacter.charaterAnimatorManager.PlayerTargetActionAnimation("Turn_R_90_01", true);
+            }
+            else if (viewableAngle <= -61 && viewableAngle >= -110)
+            {
+                aiCharacter.charaterAnimatorManager.PlayerTargetActionAnimation("Turn_L_90_01", true);
+            }
+            else if (viewableAngle >= 110 && viewableAngle <= 145)
+            {
+                aiCharacter.charaterAnimatorManager.PlayerTargetActionAnimation("Turn_R_135_01", true);
+            }
+            else if (viewableAngle <= -110 && viewableAngle >= -145)
+            {
+                aiCharacter.charaterAnimatorManager.PlayerTargetActionAnimation("Turn_L_135_01", true);
+            }
+            else if (viewableAngle >= 146 && viewableAngle <= 180)
+            {
+                aiCharacter.charaterAnimatorManager.PlayerTargetActionAnimation("Turn_R_180_01", true);
+            }
+            else if (viewableAngle <= -146 && viewableAngle >= -180)
+            {
+                aiCharacter.charaterAnimatorManager.PlayerTargetActionAnimation("Turn_L_180_01", true);
+            }
+                
         }
     }
 }

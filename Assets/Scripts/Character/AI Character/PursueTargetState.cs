@@ -20,6 +20,11 @@ namespace SG
             if (!aiCharacter.navMeshAgent.enabled)
                 aiCharacter.navMeshAgent.enabled = true;
             
+            //  IF OUR TARGET GOES OUTSIDE OF THE CHARACTER FOV, PIVOT TO FACE THEM
+            if (aiCharacter.aiCharacterCombatManager.viewableAngle < aiCharacter.aiCharacterCombatManager.minimumDetectionAngle
+                || aiCharacter.aiCharacterCombatManager.viewableAngle > aiCharacter.aiCharacterCombatManager.maximumDetectionAngle)
+                aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
+            
             aiCharacter.aiCharacterLocomotionManager.RotationTowardsAgent(aiCharacter);
 
             //  IF WE ARE WITHIN COMBAT RANGE OF A TARGET, SWITCH TO COMBAT STANCE STATE
