@@ -8,12 +8,18 @@ namespace SG
     {
         public virtual AIState Tick(AICharacterManager aiCharacter)
         {
-            
-            //  DO SOME LOGIC TO FIND THE PLAYER
-            //  IF WE HAVE FOUND THE PLAYER, RETURN THE PURSUE TARGET STATE INSTEAD
-            //  IF WE HAVE NOT FOUND THE PLAYER, CONTINUE TO RETURN THE IDLE STATE
-            
             return this;
+        }
+
+        protected virtual AIState SwitchState(AICharacterManager aiCharacter, AIState newState)
+        {
+            ResetStateFlags(aiCharacter);
+            return newState;
+        }
+
+        protected virtual void ResetStateFlags(AICharacterManager aiCharacter)
+        {
+            //  RESET ANY STATE FLAGS HERE SO WHEN YOU RETURN TO THE STATE, THEY ARE BLANK ONCE AGAIN
         }
     }
 }
