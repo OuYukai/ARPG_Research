@@ -25,7 +25,7 @@ namespace SG
         [SerializeField] bool hasRolledForComboChance = false;      //  If we have already rolled for the chance during this state
 
         [Header("Engagement Distance")] 
-        [SerializeField] protected float maximumEngagementDistance = 5; //  The distance we have to be away from the target before we enter the pursue target state
+        [SerializeField] public float maximumEngagementDistance = 5; //  The distance we have to be away from the target before we enter the pursue target state
 
         public override AIState Tick(AICharacterManager aiCharacter)
         {
@@ -57,8 +57,13 @@ namespace SG
             {
                 //  CHECK RECOVERY TIMER,
                 //  PASS ATTACK TO ATTACK STATE
+                aiCharacter.attack.currentAttack = chosenAttack;
+
                 //  ROLL FOR COMBO CHANCE
+                aiCharacter.aiCharacterCombatManager.RotateTowardsAgent(aiCharacter);
+                
                 //  SWITCH STATE
+                return SwitchState(aiCharacter, aiCharacter.attack);
             }
             
             //  IF WE ARE OUTSIDE OF THE COMBAT ENGAGEMENT DISTANCE, SWITCH TO PURSUE TARGET STATE
@@ -75,8 +80,8 @@ namespace SG
         protected virtual void GetNewAttack(AICharacterManager aiCharacter)
         {
             potentialAttacks = new List<AICharacterAttackAction>();
-
-            foreach (var potentialAttack in potentialAttacks)
+            
+            foreach (var potentialAttack in aiCharacterAttacks)
             {
                 //  IF WE ARE TOO CLOSE FOR THIS ATTACK, CHECK THE NEXT
                 if (potentialAttack.minimumAttackDistance > aiCharacter.aiCharacterCombatManager.distanceFromTarget)
@@ -119,6 +124,7 @@ namespace SG
                     chosenAttack = attack;
                     previousAttack = chosenAttack;
                     hasAttack = true;
+                    return;
                 }
             }
 

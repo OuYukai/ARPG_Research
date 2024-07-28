@@ -20,8 +20,8 @@ namespace SG
         [Header("States")] 
         public IdleState idle;
         public PursueTargetState pursueTarget;
-        //  COMBAT STANCE
-        //  ATTACK
+        public CombatStanceState combatStance;
+        public AttackState attack;
         
         protected override void Awake()
         {
@@ -36,8 +36,17 @@ namespace SG
             //  USE A COPY OF THE SCRIPTABLE OBJECTS, SO THE ORIGINALS ARE NOT MODIFIED
             idle = Instantiate(idle);
             pursueTarget = Instantiate(pursueTarget);
+            combatStance = Instantiate(combatStance);
+            attack = Instantiate(attack);
 
             currentState = idle;
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+
+            aiCharacterCombatManager.HandleActionRecovery(this);
         }
 
         protected override void FixedUpdate()

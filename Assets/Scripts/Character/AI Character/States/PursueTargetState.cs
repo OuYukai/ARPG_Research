@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SubsystemsImplementation;
 
 namespace SG
 {
@@ -28,6 +29,11 @@ namespace SG
             aiCharacter.aiCharacterLocomotionManager.RotationTowardsAgent(aiCharacter);
 
             //  IF WE ARE WITHIN COMBAT RANGE OF A TARGET, SWITCH TO COMBAT STANCE STATE
+            //if (aiCharacter.aiCharacterCombatManager.distanceFromTarget <= aiCharacter.combatStance.maximumEngagementDistance)
+                //return SwitchState(aiCharacter, aiCharacter.combatStance);
+            
+                if (aiCharacter.aiCharacterCombatManager.distanceFromTarget <= aiCharacter.navMeshAgent.stoppingDistance)
+                    return SwitchState(aiCharacter, aiCharacter.combatStance);
 
             //  IF THE TARGET IS NOT REACHABLE, AND THEY ARE FAR AWAY, RETURN HOME
 
