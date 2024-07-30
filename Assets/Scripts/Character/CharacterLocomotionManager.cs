@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace SG
 {
@@ -21,6 +22,9 @@ namespace SG
 
         [Header("Flags")] 
         public bool isRolling = false;
+        public bool canMove = true;
+        public bool canRotate = true;
+        public bool isGrounded = true;
         
         protected virtual void Awake()
         {
@@ -31,7 +35,7 @@ namespace SG
         {
             HandleGroundCheck();
 
-            if (character.isGrounded)
+            if (isGrounded)
             {
                 //  IF WE ARE NOT ATTEMPING TO JUMP OR MOVE UPWARD
                 if (yVelocity.y < 0)
@@ -61,7 +65,7 @@ namespace SG
 
         protected void HandleGroundCheck()
         {
-            character.isGrounded =
+            isGrounded =
                 Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
         }
         
@@ -69,6 +73,16 @@ namespace SG
         protected void OnDrawGizmosSelected()
         {
             //Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
+        }
+
+        public void EnableCanRotate()
+        {
+            canRotate = true;
+        }
+
+        public void DisableCanRotate()
+        {
+            canRotate = false;
         }
     }
 }

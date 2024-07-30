@@ -113,7 +113,7 @@ namespace SG
 
         private void PerformActionAnimationFromServer(string animationID, bool applyRootMotion)
         {
-            character.applyRootMotion = applyRootMotion;
+            character.charaterAnimatorManager.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(animationID, 0.2f);
         }
         
@@ -141,7 +141,7 @@ namespace SG
 
         private void PerformAttackActionAnimationFromServer(string animationID, bool applyRootMotion)
         {
-            character.applyRootMotion = applyRootMotion;
+            character.charaterAnimatorManager.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(animationID, 0.2f);
         }
         

@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 8497467849942766164}
   - component: {fileID: 8360047953997628170}
   - component: {fileID: 9162695950430317896}
-  - component: {fileID: 317264532602186594}
+  - component: {fileID: 7137772818909348570}
   - component: {fileID: 1444608536960612025}
   - component: {fileID: 42295646983091958}
   - component: {fileID: 5490638272066973739}
@@ -476,7 +476,7 @@ MonoBehaviour:
   pursueTarget: {fileID: 11400000, guid: e3b3578978ed3a1499e069c034bff8ae, type: 2}
   combatStance: {fileID: 11400000, guid: cc79286d45bd7024ebcd2e4d4252e20a, type: 2}
   attack: {fileID: 11400000, guid: d7c6871cc59be36479e4712d9989fe03, type: 2}
---- !u!114 &317264532602186594
+--- !u!114 &7137772818909348570
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -485,13 +485,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078832951421742993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f70706cfa004794bcd1c83888f4be99, type: 3}
+  m_Script: {fileID: 11500000, guid: 21867108226d49d2b0830b7851927ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lastAttackAnimationPerformed: 
   currentTarget: {fileID: 0}
   currentAttackType: 0
-  lockOnTransform: {fileID: 8209279172845079107}
+  lockOnTransform: {fileID: 0}
   actionRecoveryTimer: 0
   distanceFromTarget: 0
   viewableAngle: 0
@@ -500,6 +500,11 @@ MonoBehaviour:
   minimumDetectionAngle: -35
   maximumDetectionAngle: 35
   attackRotationSpeed: 25
+  rightHandDamageCollider: {fileID: 5070866654782688995}
+  leftHandDamageCollider: {fileID: 6016745518168382531}
+  baseDamage: 25
+  attack01DamageModifier: 1
+  attack02DamageModifier: 1.4
 --- !u!114 &1444608536960612025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,7 +1031,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 61902264245910405}
-  m_Layer: 6
+  - component: {fileID: 5731713019505134335}
+  - component: {fileID: 5070866654782688995}
+  m_Layer: 10
   m_Name: Finger_01_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1049,6 +1056,46 @@ Transform:
   - {fileID: 3418534020959089580}
   m_Father: {fileID: 4384563164200353476}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5731713019505134335
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380921461977056055}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.15
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5070866654782688995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380921461977056055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff67c524aec112d4faa6725c86475a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCollider: {fileID: 0}
+  physicalDamage: 0
+  magicDamage: 0
+  fireDamage: 0
+  lightingDamage: 0
+  holyDamage: 0
+  undeadCharacter: {fileID: 0}
 --- !u!1 &2772575353386882467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,7 +1294,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6333236344969383365}
-  m_Layer: 6
+  - component: {fileID: 309758833314322736}
+  - component: {fileID: 6016745518168382531}
+  m_Layer: 10
   m_Name: Finger_01_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1270,6 +1319,46 @@ Transform:
   - {fileID: 2626866810532327516}
   m_Father: {fileID: 7706765269818231073}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &309758833314322736
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3365620199209426187}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.15
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6016745518168382531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3365620199209426187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff67c524aec112d4faa6725c86475a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCollider: {fileID: 0}
+  physicalDamage: 0
+  magicDamage: 0
+  fireDamage: 0
+  lightingDamage: 0
+  holyDamage: 0
+  undeadCharacter: {fileID: 0}
 --- !u!1 &3733915564250085643
 GameObject:
   m_ObjectHideFlags: 0
@@ -2193,6 +2282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8209279172845079107}
+  - component: {fileID: 8671035442814522920}
   m_Layer: 7
   m_Name: Lock On Target
   m_TagString: Untagged
@@ -2215,6 +2305,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 682553017209555342}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8671035442814522920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269173764249595177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c50b8c20ffc323b428ae618d916068e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6316468349488898704
 GameObject:
   m_ObjectHideFlags: 0

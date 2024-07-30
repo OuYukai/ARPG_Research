@@ -27,12 +27,8 @@ namespace SG
 
         [Header("Flags")]
         public bool isPerformingAction = false;
-        public bool isGrounded = true;
-        public bool applyRootMotion = false;
-        public bool canMove = true;
-        public bool canRotate = true;
-
-
+        
+       
         protected virtual void Awake()
         {
             DontDestroyOnLoad(this);
@@ -55,7 +51,7 @@ namespace SG
 
         protected virtual void Update()
         {
-            animator.SetBool("IsGrounded", isGrounded);
+            animator.SetBool("IsGrounded", characterLocomotionManager.isGrounded);
             // IF THIS CHARACTER IS BEING CONTROLLED FROM OUR SIDE, THEN ASSIGN ITS NETWORK POSITION TO THE POSITION OF OUR TRANSFORM
             if (IsOwner)
             {

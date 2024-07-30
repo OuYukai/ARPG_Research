@@ -25,6 +25,7 @@ namespace SG
                 return SwitchState(aiCharacter, aiCharacter.idle);
             
             //  ROTATE TOWARDS THE TARGET WHILST ATTACKING
+            aiCharacter.aiCharacterCombatManager.RotateTowardsTargetWhilstAttacking(aiCharacter);
             
             //  SET MOVEMENT VALUES TO 0
             aiCharacter.charaterAnimatorManager.UpdateAnimatorMovementParameters(0, 0, false);
@@ -35,18 +36,18 @@ namespace SG
                 if (currentAttack.comboAction != null)
                 {
                     //  IF CAN COMBO
-                    hasPerformedCombo = true;
-                    currentAttack.comboAction.AttempToPerformAction(aiCharacter);
+                    //hasPerformedCombo = true;
+                    //currentAttack.comboAction.AttempToPerformAction(aiCharacter);
                 }
             }
+            
+            if (aiCharacter.isPerformingAction)
+                return this;
 
             if (!hasPerformedAttack)
             {
                 //  IF WE ARE STILL RECOVERING FROM AN ACTION, WAIT BEFORE PERFORMING ANOTHER
                 if (aiCharacter.aiCharacterCombatManager.actionRecoveryTimer > 0)
-                    return this;
-
-                if (aiCharacter.isPerformingAction)
                     return this;
                 
                 PerformAttack(aiCharacter);

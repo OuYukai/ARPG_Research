@@ -18,9 +18,9 @@ namespace SG
 
             //  THIS IS CALLED AN ACTION ENDS, AND THE STATE RETURNS TO "EMPTY"
             character.isPerformingAction = false;
-            character.applyRootMotion = false;
-            character.canMove = true;
-            character.canRotate = true;
+            character.charaterAnimatorManager.applyRootMotion = false;
+            character.characterLocomotionManager.canMove = true;
+            character.characterLocomotionManager.canRotate = true;
             character.characterLocomotionManager.isRolling = false;
             character.charaterAnimatorManager.DisableCanCombo();
 

@@ -87,7 +87,7 @@ namespace SG
 
         private void HandleGroundMovement()
         {
-            if (!player.canMove)
+            if (!player.playerLocomotionManager.canMove)
                 return;
 
             GetMovementValues();
@@ -127,7 +127,7 @@ namespace SG
 
         private void HandleFreeFallMovement()
         {
-            if (!player.isGrounded)
+            if (!player.playerLocomotionManager.isGrounded)
             {
                 Vector3 freeFallDirection;
 
@@ -145,7 +145,7 @@ namespace SG
             if (player.isDead.Value)
                 return;
             
-            if (!player.canRotate)
+            if (!player.playerLocomotionManager.canRotate)
                 return;
 
             if (player.playerNetworkManager.isLockedOn.Value)
@@ -279,7 +279,7 @@ namespace SG
                 return;
             
             //  IF WE ARE NOT GROUNDED, WE DO NOT WANT TO ALLOW A JUMP
-            if (!player.isGrounded)
+            if (!player.playerLocomotionManager.isGrounded)
                 return;
             
             //  IF WE ARE TWO HANDING OUR WEAPON, PLAY THE TWO HANDED JUMP ANIMATION, OTHERWISE PLAY THE ONE HANDED ANIMATION ( TO DO )
