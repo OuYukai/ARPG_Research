@@ -97,6 +97,7 @@ namespace SG
         {
             base.OnNetworkDespawn();
             
+            animator.SetBool("IsMoving", characterNetworkManager.isMoving.Value);
             characterNetworkManager.isMoving.OnValueChanged -= characterNetworkManager.OnIsMovingChanged;
         }
 

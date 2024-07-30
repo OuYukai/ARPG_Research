@@ -11,12 +11,8 @@ namespace SG
     {
         public static WorldAIManager instance;
 
-        [Header("DEBUG MENU")] 
-        [SerializeField] private bool despawnCharacters = false;
-        [SerializeField] private bool respawnCharacters = false;
-
         [Header("Characters")] 
-        [SerializeField] private GameObject[] aiCharacters;
+        [SerializeField] List<AICharacterSpawner> aiCharacterSpawners;
         [SerializeField] private List<GameObject> spawnedInCharacters;
 
         private void Awake()
@@ -30,48 +26,13 @@ namespace SG
                 Destroy(gameObject);
             }
         }
-
-        private void Start()
+        
+        public void SpawnCharacter(AICharacterSpawner aiCharacterSpawner)
         {
             if (NetworkManager.Singleton.IsServer)
             {
-                //  SPAWN ALL A.I IN SCENE
-                StartCoroutine(WaitForSceneToLoadTheSpawnCharacters());
-            }
-        }
-
-        private void Update()
-        {
-            if (despawnCharacters)
-            {
-                despawnCharacters = false;
-                DespawnAllCharacters();
-            }
-
-            if (respawnCharacters)
-            {
-                respawnCharacters = false;
-                SpawnAllCharacters();
-            }
-        }
-
-        private IEnumerator WaitForSceneToLoadTheSpawnCharacters()
-        {
-            while (!SceneManager.GetActiveScene().isLoaded)
-            {
-                yield return null;
-            }
-            
-            SpawnAllCharacters();
-        }
-
-        private void SpawnAllCharacters()
-        {
-            foreach (var character in aiCharacters)
-            {
-                GameObject instantiatedCharacter = Instantiate(character);
-                instantiatedCharacter.GetComponent<NetworkObject>().Spawn();
-                spawnedInCharacters.Add(instantiatedCharacter);
+                aiCharacterSpawners.Add(aiCharacterSpawner);
+                aiCharacterSpawner.AttempToSpawnCharacter();
             }
         }
 
